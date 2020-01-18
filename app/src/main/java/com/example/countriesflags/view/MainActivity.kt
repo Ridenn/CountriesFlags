@@ -1,7 +1,8 @@
-package com.example.countriesflags
+package com.example.countriesflags.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.countriesflags.R
 
 class MainActivity : AppCompatActivity() {
 
