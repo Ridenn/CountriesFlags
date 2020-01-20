@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
             adapter = countriesAdapter
         }
 
+        swipeRefreshLayout.setOnRefreshListener {
+            //TODO - faz o 'spinner' do RefreshLayout desaparecer quando puxado para baixo
+            swipeRefreshLayout.isRefreshing = false
+            viewModel.refresh()
+        }
+
         //TODO - vai carregar a lista de países na tela
         observeViewModel()
     }
