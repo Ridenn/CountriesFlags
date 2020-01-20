@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CountriesFlags</string>
+    <string name="error_text">Ocorreu um erro ao carregar os dados.</string>
 </resources>
