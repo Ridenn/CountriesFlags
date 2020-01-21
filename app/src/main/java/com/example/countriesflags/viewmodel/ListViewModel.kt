@@ -2,16 +2,23 @@ package com.example.countriesflags.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.countriesflags.dependencyinjection.DaggerApiComponent
 import com.example.countriesflags.model.CountriesService
 import com.example.countriesflags.model.Country
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class ListViewModel : ViewModel() {
 
-    private val countriesService = CountriesService()
+    @Inject
+    lateinit var countriesService: CountriesService
+
+    init {
+        DaggerApiComponent.create().inject(this)
+    }
 
     //TODO - fecha a conexão quando for necessário
     private val disposable = CompositeDisposable()
@@ -30,7 +37,7 @@ class ListViewModel : ViewModel() {
             countriesService.getCountries()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<List<Country>>(){
+                .subscribeWith(object : DisposableSingleObserver<List<Country>>() {
 
                     override fun onSuccess(value: List<Country>?) {
                         countries.value = value
